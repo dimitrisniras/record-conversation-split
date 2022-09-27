@@ -4,15 +4,17 @@ This React application allows you to make outbound calls using the Vonage Client
 
 ## Capabilities
 
-Adds Voice capability to your nexmo application and configures the Voice `Answer URL` and `Event URL` webhooks with a connect action on a hardcoded number (`voiceAnswer` and `voiceEvent` in `index.js`).
+Adds Voice capability to your nexmo application and configures the Voice `Answer URL` and `Event URL` webhooks with a conversation action (`voiceAnswer`, `voiceEvent` and `rtcEvent` in `index.js`).
 
-## To run the server
+## Run the server
 
-Pre-requisite: node version >= 14 `nvm use`
+Pre-requisite: Node.JS version >= 14
+
+`nvm use`
 
 `npm run server`
 
-## To run the client
+## Run the client
 
 In the project directory, you can run:
 
@@ -49,15 +51,14 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-
 ## How to use it
 
 You'll have to create at least 3 legs on the conversation (preferrably 2 IP and 1 PSTN leg). You'll have to do 2 outbound calls using the react client above and 1 inbound call on the LVN attached to the application.
 
-The legs will be transferred to the same conversation, a voice will be heared and the recording will start.
+The legs will be transferred to the same conversation, a voice will be heard and the recording will start.
 
-The recording is using the split functionality with 2 channels (1 channel will record the initator leg and the other one the rest of them).
+The recording is using the split functionality with 2 channels (1 channel will record the initator's leg and the other one the rest of them).
 
-The recording can be stopped at any time sending a DTMF (pressing 5) or when iniator leaves the call (that's the split logic).
+The recording can be stopped at any time sending a DTMF (pressing 5) or when the iniator leaves the call (that's the split logic).
 
 You can query `localhost:5001/recordingEvents` to get the list of the recording events (and so the url of where to download the recording).
