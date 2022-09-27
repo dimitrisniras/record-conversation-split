@@ -58,6 +58,6 @@ The legs will be transferred to the same conversation, a voice will be heared an
 
 The recording is using the split functionality with 2 channels (1 channel will record the initator leg and the other one the rest of them).
 
-The recording can be stopped at any time sending a DTMF (pressing 5) or while iniator leaves the call (that's the split logic).
+The recording can be stopped at any time sending a DTMF (pressing 5) or when iniator leaves the call (that's the split logic).
 
 You can query `localhost:5001/recordingEvents` to get the list of the recording events (and so the url of where to download the recording).
