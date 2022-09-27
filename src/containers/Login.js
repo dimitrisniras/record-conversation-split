@@ -20,22 +20,11 @@ function Login({ nexmoApp, setNexmoApp, setOutboundCall }) {
     setUserToken(event.target.value);
   };
 
-  const setupConversationListeners = (app, call) => {
-    const conversation = call.conversation;
-    conversation.on("member:left", conversation.id, (from, event) => {
-      if (from.userId === app.me.id) {
-        setOutboundCall(null);
-        conversation.releaseGroup(conversation.id);
-      }
-    });
-  };
-
   const setupApplicationListeners = (app) => {
-    app.on("member:call", (member, call) => {
-      setupConversationListeners(app, call);
-      app.on("rtc:transfer", (member) => {
-        setOutboundCall(call);
-      });
+    app.on("call:status:changed", (call) => {
+      if (call.status === "unanswered" || call.status === "rejected" || call.status === "completed") {
+        setOutboundCall(null);
+      }
     });
   };
 

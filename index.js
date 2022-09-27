@@ -79,7 +79,7 @@ const voiceAnswer = async (req, res, next) => {
 const rtcEvent = async (event, { logger, csClient, storageClient }) => {
   try {
     const type = event.type;
-    if (type == "rtc:transfer" && !recording_enabled) {
+    if (type === "rtc:transfer" && !recording_enabled) {
       const { conversation_id } = event;
       let recordRes = await csClient({
         url: `${DATACENTER}/v0.3/conversations/${conversation_id}/events`,
@@ -102,7 +102,7 @@ const rtcEvent = async (event, { logger, csClient, storageClient }) => {
       record_id = recordRes.data.body.recording_id;
       recording_enabled = true;
       //audio:dtmf
-    } else if (type == "audio:dtmf" && event.body && event.body.digit == "5") {
+    } else if (type === "audio:dtmf" && event.body && event.body.digit === "5") {
       /* the digit 5 was pressed */
       const { conversation_id } = event;
       if (record_id) {
@@ -118,7 +118,7 @@ const rtcEvent = async (event, { logger, csClient, storageClient }) => {
           },
         });
       }
-    } else if (type == "audio:record:done") {
+    } else if (type === "audio:record:done") {
       const recordingsString = await storageClient.get("recordings");
       const recordings = recordingsString ? JSON.parse(recordingsString) : [];
       recordings.push(event);
